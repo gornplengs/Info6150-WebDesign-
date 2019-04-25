@@ -1,0 +1,76 @@
+<!doctype html>
+<head>
+    <title>Table</title> 
+    <script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type = "text/javascript" language = "javascript">
+    $(document).ready(function(){
+        $("#title").html(localStorage.getItem("title"));
+        $("#firstName").html(localStorage.getItem("firstName"));
+        $("#lastName").html(localStorage.getItem("lastName"));
+        $("#email").html(localStorage.getItem("emailId"));
+        $("#phoneNumber").html(localStorage.getItem("phoneNumber"));
+        $("#zipcode").html(localStorage.getItem("zipcode"));
+        $("#hear").html(localStorage.getItem("hear"));
+        $("#way").html(localStorage.getItem("way"));
+        $("#example").html(localStorage.getItem("example"));
+        $("#comments").html(localStorage.getItem("comments"));
+    })
+    </script>
+    <style>
+        #container{
+			width: 700px;
+			margin-left: auto;
+            margin-right: auto;
+			/* background-color: beige; */
+            text-align: center;
+		} 
+    </style>  
+</head>
+<body>
+    <div id="container">
+        <table border="1" bgcolor="beige">
+            <caption><H2>Feedback</H2></caption>
+            <tr>
+                <td>Title</td>
+                <td id="title"></td>
+            </tr>
+            <tr>
+                <td>First Name</td>
+                <td id="firstName"></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td id="lastName"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td id="email"></td>
+            </tr>
+            <tr>
+                <td>Phone Number</td>
+                <td id="phoneNumber"></td>
+            </tr>
+            <tr>
+                <td>Zipcode</td>
+                <td id="zipcode"></td>
+            </tr>
+            <tr>
+                <td>How did you hear</td>
+                <td id="hear"></td>
+            </tr>
+            <tr>
+                <td>The exact way is</td>
+                <td id="way"></td>
+            </tr>
+            <tr>
+                <td>Example</td>
+                <td id="example"></td>
+            </tr>
+            <tr>
+                <td>Comments</td>
+                <td id="comments"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

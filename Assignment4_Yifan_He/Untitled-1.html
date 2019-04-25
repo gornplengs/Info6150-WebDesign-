@@ -1,0 +1,75 @@
+<!doctype html>
+<head>
+    <title>Table</title> 
+    <style>
+        #container{
+			width: 700px;
+			margin-left: auto;
+            margin-right: auto;
+			/* background-color: beige; */
+            text-align: center;
+		} 
+    </style>  
+</head>
+<body onload="getData()">
+    <div id="container">
+        <table border="1" bgcolor="beige">
+            <caption><H2>Feedback</H2></caption>
+            <tr>
+                <td>Title</td>
+                <td id="title"></td>
+            </tr>
+            <tr>
+                <td>First Name</td>
+                <td id="firstName"></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td id="lastName"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td id="email"></td>
+            </tr>
+            <tr>
+                <td>Phone Number</td>
+                <td id="phoneNumber"></td>
+            </tr>
+            <tr>
+                <td>Zipcode</td>
+                <td id="zipcode"></td>
+            </tr>
+            <tr>
+                <td>How did you hear</td>
+                <td id="hear"></td>
+            </tr>
+            <tr>
+                <td>The exact way is</td>
+                <td id="way"></td>
+            </tr>
+            <tr>
+                <td>Example</td>
+                <td id="example"></td>
+            </tr>
+            <tr>
+                <td>Comments</td>
+                <td id="comments"></td>
+            </tr>
+        </table>
+    </div>
+<script>
+function getData(){
+    document.getElementById("title").innerHTML = localStorage.getItem("title");
+    document.getElementById("firstName").innerHTML = localStorage.getItem("firstName");
+    document.getElementById("lastName").innerHTML = localStorage.getItem("lastName");
+    document.getElementById("email").innerHTML = localStorage.getItem("emailId");
+    document.getElementById("phoneNumber").innerHTML = localStorage.getItem("phoneNumber");
+    document.getElementById("zipcode").innerHTML = localStorage.getItem("zipcode");
+    document.getElementById("hear").innerHTML = localStorage.getItem("hear");
+    document.getElementById("way").innerHTML = localStorage.getItem("way");
+    document.getElementById("example").innerHTML = localStorage.getItem("example");
+    document.getElementById("comments").innerHTML = localStorage.getItem("comments");
+}
+</script>
+</body>
+</html>

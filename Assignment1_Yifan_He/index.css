@@ -1,0 +1,66 @@
+header{
+    background-color: #8b636c;
+    margin-left: auto;
+    margin-right: auto;
+    width:80%;
+    text-align: center; 
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 50px;
+    text-shadow: 3px 3px 5px #666;
+}
+div.coffee{
+    color: #c1cdcd;
+}
+div.shop{
+    color: #e0eeee;
+}
+
+body{
+    margin-left: auto;
+    margin-right: auto;
+    width:80%;
+    background-color:#8b636c;
+    
+}
+nav{
+    margin: auto;
+    text-align: justify;
+    text-align-last: justify;
+    width: 80%;
+    padding: 20px;
+    background-color: #8b636c;
+    font-size: 25px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+a:link { text-decoration: none; color: #fff0f5; } /*正常情况下无下划线*/
+a:visited { text-decoration: none; color: #fff0f5;} /*访问过的链接无下划线*/
+a:hover { text-decoration: underline; } /*鼠标指向时显示下划线*/
+a:active { text-decoration: underline; } /*鼠标按下时也显示*/
+
+#container
+{
+    margin-left: auto;
+    margin-right: auto;
+    /* width:80%; */
+    text-align: center;
+}
+footer{
+    color: #fff0f5;
+    width: 1170px;
+    width: 100%;
+    
+}    
+ul{
+    text-align: center;
+}
+li{
+    display: inline-block;
+    list-style: none;  
+}
+ul:after {
+  content: "";
+  display: inline-block;
+  position: relative;
+  width: 100%;
+}

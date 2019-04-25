@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Image Gallery</title>
+        <style>
+        header{
+            text-align: center;
+        }
+        #container
+        {
+            margin-left: auto;
+            margin-right: auto;
+            width:80%;
+        }
+
+        div.gallery{
+            margin: 20px;
+            border: 1px solid #cccccc;
+            float: left;
+            width: 150px;
+            padding: 20px;
+        }
+
+        div.gallery img{
+            width: 150px;
+            height: 150px;
+            display: block;
+        }
+
+        div.gallery:hover{
+            border: 1px solid #777777;
+            border-radius: 25px;
+            box-shadow: 10px -10px grey;
+        }
+
+        div.description{
+            text-align: center;
+            padding: 10px;
+        }
+
+        a.visited{
+            color: green;
+
+        }
+
+        a.hover{
+            color: #000000
+        }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <div class="gallery">
+                <a href="images/chelseaa.png" target="_blank">
+                <img src="images/chelsea.png" alt="Product 1 Image">
+                <div class="description">Product 1</div>
+            </a>
+
+            </div>
+        </div>
+    </body>
+</html>

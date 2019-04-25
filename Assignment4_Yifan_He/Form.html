@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Feedback</title>
+	<style>
+		label {	float: left;
+				width: 150px;}
+		#container{
+			width: 700px;
+			margin: auto;
+			background-color: beige;
+		} 
+		main{
+			padding: 50px;
+		}
+		li{
+			list-style-type:none;
+			margin:0px;
+			padding:0px;
+			vertical-align:middle;
+		}		
+	</style>
+</head>
+<body>
+	<div id="container">	 
+		<main>
+		<h2>Feeback</h2>
+		<h3>Love something? Hate something? Let us know!</h3>
+			Note : Fields marked with an asterisk(*) are mandatory
+			<br><br>
+			<form method="post" novalidate action="Untitled-1.html" onsubmit="return validate_form(this)">
+				<label>Title*:</label>
+				<input type="radio" name="title" id="miss" value="Miss"/>Miss
+				<input type="radio" name="title" id="mr" value="Mr"/>Mr.
+				<input type="radio" name="title" id="mrs" value="Mrs"/>Mrs.
+				<br><br>
+				<label for="firstName">First Name*:</label>   
+				<!-- The for attribute specifies which form element a label is bound to. -->
+				<input type="text" name="firstName" id="firstName" placeholder="First Name" />	
+				<br><br>
+				
+
+				<label for="lastName">Last Name*:</label>
+				<input type="text" name="lastName" id="lastName" placeholder="Last Name" />
+				<br><br>
+				
+
+				<label for="emailId">Email Id*:</label>
+				<input type="text" name="emailId" id="emailId" placeholder="yourname@domain.com" onkeyup="emailReg()" />
+				<br><br>
+				
+
+				<label for="phoneNumber">Phone Number*:</label>
+				<input type="text" name="phoneNumber" id="phoneNumber" placeholder="xxx-xxx-xxxx" onkeyup="phoneReg()" />
+				<br><br>
+				
+				<label for="zipcode">ZipCode*:</label>
+				<input type="text" name="zipcode" id="zipcode" placeholder="xxxxx" onkeyup="zipReg()" />
+				<br><br>
+				
+				<label for="select">How did you hear*:</label>
+				<select id="select"  name="source" onchange="popCheckbox(this)">
+                    <option value="Default" selected="selected">-Please select an option-</option>
+					<option value="Social Media">Social Media</option>
+					<option value="Website">Website</option>
+					<option value="Apps">Apps</option>
+					<option value="People">People</option>
+					<option value="Other">Other</option>
+				</select>
+				<br><br>
+				<!-- <input type='checkbox' name="source" value="facebook" /> Facebook
+				<input type='checkbox' name="source" value="google" /> Google
+				<input type='checkbox' name="source" value="yelp" /> Yelp 
+				<br><br>  -->
+             
+				<label for="comments">Comments*:</label>
+				<textarea name="text" id="comments" placeholder="Your comments" rows="5" cols="25"></textarea>
+				<br><br>
+				<input type="Submit" id="btn">
+				<input type="Reset">
+				<br><br>
+			</form>
+		</main>
+	</div>
+
+<script>
+function phoneReg(){
+  var phoneReg=/[0-9]{3}\-[0-9]{3}\-([0-9]{4})$/;
+  var phone = document.getElementById("phoneNumber").value;
+  if(phoneReg.test(phone) == true){
+	  document.getElementById("phoneNumber").style.backgroundColor="white";
+  }else{
+	  document.getElementById("phoneNumber").style.backgroundColor="#fa8072";
+  }
+}
+function zipReg(){
+	var zipReg=/^[0-9]{5}$/; //type more to remain red
+	var zipcode = document.getElementById("zipcode").value;
+	if(zipReg.test(zipcode) == true){
+		document.getElementById("zipcode").style.backgroundColor="white";
+	}else{
+		document.getElementById("zipcode").style.backgroundColor="#fa8072";
+	}
+}
+function emailReg(){
+	var emailReg=/^([0-9A-Za-z])+[0-9A-Za-z_\.\-]+\@[0-9A-Za-z]+\.([A-Za-z]{2,3})$/;
+	var email = document.getElementById("emailId").value;
+	if(emailReg.test(email) == true){
+		document.getElementById("emailId").style.backgroundColor="white";
+	}else{
+		document.getElementById("emailId").style.backgroundColor="#fa8072";
+	}
+}
+var ulCount = 0;
+function popCheckbox(selectList){
+	var select = document.getElementById("select");
+	var p = select.parentNode;
+	//alert(p1.nodeValue);
+	var comments = document.getElementById("comments");
+	var selectValue = select.value;
+	// alert(selectValue);
+	switch(selectValue){
+		case "Social Media":
+			if(ulCount>0){
+				p.removeChild(document.getElementsByTagName("ul")[0]);
+				ulCount--;
+			}	  
+			// var checkbox = document.createElement("input"); //specifies by tagname
+			// checkbox.setAttribute("type","checkbox");
+			// checkbox.setAttribute("id","checkbox");
+			var text = document.createTextNode("Facebook");
+			var ul = document.createElement("ul");
+			var li = document.createElement("li");
+			li.innerHTML = '<input id="checkbox" type="checkbox" name="hear" value="Facebook" onclick="checkboxOnclick(this)"/>';
+			// li.appendChild(checkbox);
+			var label = document.createElement("li");
+			label .innerHTML = '<label id="label" for="textarea" style="visibility:hidden;">Please make an example*:</label>';
+			var textarea = document.createElement("li");
+			textarea.innerHTML = '<textarea name="example" id="textarea" style="visibility:hidden;" placeholder="Your example" rows="2" cols="25"></textarea>';
+			li.appendChild(text);
+			li.appendChild(label);
+			li.appendChild(textarea);
+			ul.appendChild(li);
+			insertAfter(ul,select);
+			ulCount++;
+			break;
+		case "Website":
+		    if(ulCount>0){
+				p.removeChild(document.getElementsByTagName("ul")[0]);
+				ulCount--;
+			}
+			// var checkbox = document.createElement("input"); //specifies by tagname
+			// checkbox.setAttribute("type","checkbox");
+			// checkbox.setAttribute("id","checkbox");
+			var text = document.createTextNode("Google");
+			var ul = document.createElement("ul");
+			var li = document.createElement("li");
+			li.innerHTML = '<input id="checkbox" type="checkbox" name="hear" value="Google" onclick="checkboxOnclick(this)"/>';
+			// li.appendChild(checkbox);
+			var label = document.createElement("li");
+			label .innerHTML = '<label id="label" for="textarea" style="visibility:hidden;">Please make an example*:</label>';
+			var textarea = document.createElement("li");
+			textarea.innerHTML = '<textarea name="example" id="textarea" style="visibility:hidden;" placeholder="Your example" rows="2" cols="25"></textarea>';
+			li.appendChild(text);
+			li.appendChild(label);
+			li.appendChild(textarea);
+			ul.appendChild(li);
+			insertAfter(ul,select);
+			ulCount++;
+			break;
+		case "Apps":
+			if(ulCount>0){
+				p.removeChild(document.getElementsByTagName("ul")[0]);
+				ulCount--;
+			}
+			// var checkbox = document.createElement("input"); //specifies by tagname
+			// checkbox.setAttribute("type","checkbox");
+			// checkbox.setAttribute("id","checkbox");
+			var text = document.createTextNode("Yelp");
+			var ul = document.createElement("ul");
+			var li = document.createElement("li");
+			li.innerHTML = '<input id="checkbox" type="checkbox" name="hear" value="Yelp" onclick="checkboxOnclick(this)"/>';
+			// li.appendChild(checkbox);
+			var label = document.createElement("li");
+			label .innerHTML = '<label id="label" for="textarea" style="visibility:hidden;">Please make an example*:</label>';
+			var textarea = document.createElement("li");
+			textarea.innerHTML = '<textarea name="example" id="textarea" style="visibility:hidden;" placeholder="Your example" rows="2" cols="25"></textarea>';
+			li.appendChild(text);
+			li.appendChild(label);
+			li.appendChild(textarea);
+			ul.appendChild(li);
+			insertAfter(ul,select);
+			ulCount++;
+			break;
+		case "People":
+			if(ulCount>0){
+				p.removeChild(document.getElementsByTagName("ul")[0]);
+				ulCount--;
+			}
+			// var checkbox = document.createElement("input"); //specifies by tagname
+			// checkbox.setAttribute("type","checkbox");
+			// checkbox.setAttribute("id","checkbox");
+			var text = document.createTextNode("Family");
+			var ul = document.createElement("ul");
+			var li = document.createElement("li");
+			li.innerHTML = '<input id="checkbox" type="checkbox" name="hear" value="Family" onclick="checkboxOnclick(this)"/>';
+			// li.appendChild(checkbox);
+			var label = document.createElement("li");
+			label .innerHTML = '<label id="label" for="textarea" style="visibility:hidden;">Please make an example*:</label>';
+			var textarea = document.createElement("li");
+			textarea.innerHTML = '<textarea name="example" id="textarea" style="visibility:hidden;" placeholder="Your example" rows="2" cols="25"></textarea>';
+			li.appendChild(text);
+			li.appendChild(label);
+			li.appendChild(textarea);
+			ul.appendChild(li);
+			insertAfter(ul,select);
+			ulCount++;
+			break;
+		case "Other":
+			if(ulCount>0){
+				p.removeChild(document.getElementsByTagName("ul")[0]);
+				ulCount--;
+			}
+			// var checkbox = document.createElement("input"); //specifies by tagname
+			// checkbox.setAttribute("type","checkbox");
+			// checkbox.setAttribute("id","checkbox");
+			var text = document.createTextNode("Flyer");
+			var ul = document.createElement("ul");
+			var li = document.createElement("li");
+			li.innerHTML = '<input id="checkbox" type="checkbox" name="hear" value="Flyer" onclick="checkboxOnclick(this)"/>';
+			// li.appendChild(checkbox);
+			var label = document.createElement("li");
+			label .innerHTML = '<label id="label" for="textarea" style="visibility:hidden;">Please make an example*:</label>';
+			var textarea = document.createElement("li");
+			textarea.innerHTML = '<textarea id="textarea" name="example" style="visibility:hidden;" placeholder="Your example" rows="2" cols="25"></textarea>';
+			li.appendChild(text);
+			li.appendChild(label);
+			li.appendChild(textarea);
+			ul.appendChild(li);
+			insertAfter(ul,select);
+			ulCount++;
+			break;
+	}
+}
+function checkboxOnclick(checkbox){
+	if(checkbox.checked == true){
+		document.getElementById("textarea").style.visibility = "visible";
+		document.getElementById("label").style.visibility = "visible";
+	}else{
+		document.getElementById("textarea").style.visibility = "hidden";
+		document.getElementById("label").style.visibility = "hidden";
+	}	
+}
+function insertAfter(newEl, targetEl){
+  var parentEl = targetEl.parentNode;
+    if(parentEl.lastChild == targetEl){
+      parentEl.appendChild(newEl);
+    }else{
+      parentEl.insertBefore(newEl,targetEl.nextSibling);
+    }            
+} 
+function validate_required(field,alerttxt){
+	with(field){  //with语句的作用是将代码的作用域设置到一个特定的作用域中
+		if(value==null||value=="")
+			{alert(alerttxt);return false}
+		else {return true}
+	}
+}
+function validate_form(thisform){
+	var fill_title = document.getElementsByName("title");  //validate radio button
+	var flag=0;
+	for(var i=0;i<fill_title.length;i++){
+		if(fill_title.item(i).checked == true){
+			flag=1;
+			break;
+		}
+	}
+	if(!flag){
+		alert("Please choose a title!")
+		return false;
+	}
+	with (thisform){
+		// if(validate_required(title,"Title must be filled out!")==false){
+		// 	title.focus();
+		// 	return false;
+		// }
+		if(validate_required(firstName,"First Name must be filled out!")==false){ 
+			firstName.focus();
+			return false;
+		}
+		if(validate_required(lastName,"Last Name must be filled out!")==false){
+			lastName.focus();
+			return false;
+		}
+		if(validate_required(emailId,"Email must be filled out!")==false){
+			emailId.focus();
+			return false;
+		}
+		if(validate_required(phoneNumber,"Phone Number must be filled out!")==false){
+			phoneNumber.focus();
+			return false;
+		}
+		if(validate_required(zipcode,"Zipcode must be filled out!")==false){
+			zipcode.focus();
+			return false;
+		}
+		if(validate_required(source,"Please select a way!")==false){
+			source.focus();
+			return false;
+		}
+		if(validate_required(example,"Please select a checkbox and filled out the example!")==false){
+			example.focus();
+			return false;  //validate both the checkbox and the textarea
+		}
+		if(validate_required(text,"Comments must be filled out!")==false){
+			text.focus();
+			return false;
+		}
+	}
+}
+var btn = document.getElementById("btn");
+var radio = document.getElementsByName("title");
+var first_name = document.getElementById("firstName");
+var last_name = document.getElementById("lastName");
+var email_id = document.getElementById("emailId");
+var phone_number = document.getElementById("phoneNumber");
+var zipcode = document.getElementById("zipcode");
+var mySelect = document.getElementById("select");
+var checkbox = document.getElementsByName("hear");
+var example = document.getElementsByName("example");
+var comment = document.getElementById("comments");
+btn.addEventListener("click",function(){
+	for(var i=0;i<radio.length;i++){
+		if(radio[i].checked){
+			localStorage.title = radio[i].value;
+			// alert(radio[i].value);
+		}
+	}		
+	localStorage.firstName = first_name.value;
+	localStorage.lastName = last_name.value;
+	localStorage.emailId = email_id.value;
+	localStorage.phoneNumber = phone_number.value;
+	localStorage.zipcode = zipcode.value;
+	var myindex = mySelect.selectedIndex; 
+	localStorage.hear = mySelect.options[myindex].value;
+	localStorage.comments = comment.value;
+	for(var i=0;i<checkbox.length;i++){
+		if(checkbox[i].checked){
+			localStorage.way = checkbox[i].value;
+			localStorage.example = example[i].value;
+			// alert(example[i].value);
+		}
+	}		
+})
+</script>
+
+</body>
+</html>

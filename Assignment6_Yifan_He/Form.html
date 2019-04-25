@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/localization/messages_en.js"></script>
+    <script type = "text/javascript" language = "javascript">
+        $.validator.setDefaults({
+            submitHandler: function(form){
+                var radio = $('input[type="radio"]');
+                var checkbox = $('input[type="checkbox"]');
+                var check = $("#checkbox");
+                alert("You are submitting the form!");
+                for(var i=0;i<radio.length;i++){
+                    if(radio[i].checked){
+                        localStorage.title = radio[i].value;
+                        // alert(radio[i].value);
+                    }
+                }		
+                localStorage.firstName = $("#firstName").val();
+                localStorage.lastName = $("#lastName").val();
+                localStorage.emailId = $("#emailId").val();
+                localStorage.phoneNumber = $("#phoneNumber").val();
+                localStorage.zipcode = $("#zipcode").val();
+                localStorage.hear = $("#select").find(":selected").text();
+                localStorage.comments = $("#comments").val();
+                // for(var i=0;i<$('input:checkbox[name="hear"]').length;i++){
+                //     if($('input:checkbox[name="hear"]')[i].is(":checked")){
+                //         localStorage.way = $('input:checkbox[name="hear"]')[i].val();
+                //         localStorage.example = $("#textarea").val();
+                //         break;
+                //         // alert(example[i].value);
+                //     }else{
+                //         localStorage.way = "";
+                //         localStorage.example = "";
+                //     }
+                // }	
+                $('input:checkbox[name="hear"]').each(function(){    
+                    if($(this).is(':checked')){
+                        // alert($(this).val());
+                        localStorage.way = $(this).val();  //only store the last checked value
+                        localStorage.example = $("#textarea").val();
+                        $(this).prop('checked', false);
+                        $("#textarea").val(null);
+                        // break;
+                        return false;
+                    }else{
+                        localStorage.way = "";
+                        localStorage.example = "";
+                    }
+                });	
+                form.submit();
+                // form.reset();
+            }
+        });
+        $(document).ready(function() {
+           $("#myForm").validate({
+            //    debug:true,
+            // errorPlacement: function(error,element){
+            //     error.appendTo('#errordiv');
+            // },
+                rules:{
+                   firstName:{
+                     required:true
+                   },
+                   lastName:{
+                       required:true
+                   },
+                   emailId:{
+                       required:true,
+                       email:true
+                   },
+                   phoneNumber:{
+                       required:true,
+                        digits:true,
+                        maxlength:10,
+                        minlength:10
+                   },
+                   zipcode:{
+                       required:true,
+                       digits:true,
+                       maxlength:5,
+                       minlength:5
+                   },
+                   title:{
+                       required:true
+                   },
+                   source:{
+                       required:true
+                   }
+                },
+                messages:{
+                    firstName:{
+                        required:""
+                    },
+                    lastName:{
+                        required:""
+                    },
+                    emailId:{
+                        required:"",
+                        email:"The format is wrong"
+                    },
+                    phoneNumber:{
+                        required:"",
+                        digits:"The format is wrong",
+                        maxlength:"The format is wrong",
+                        minlength:"The format is wrong"
+                    },
+                    zipcode:{
+                       required:"",
+                       digits:"The format is wrong",
+                       maxlength:"The format is wrong",
+                       minlength:"The format is wrong"
+                   },
+                    title:{
+                        required:""
+                    },
+                    source:{
+                        required:""
+                    }
+                }        
+            })
+            $("#btn").click(function(){
+                if ( $('input[type="radio"]').is(':checked')){
+                    if($("#firstName").val() == ""){
+                        alert("Please enter your first name!");
+                    }else{
+                        if($("#lastName").val() == ""){
+                            alert("Please enter your last name!");
+                        }else{
+                            if($("#emailId").val() == ""){
+                                alert("Please enter your email!");
+                            }else{
+                                if($("#phoneNumber").val() == ""){
+                                    alert("Please enter your phone number!");
+                                }else{
+                                    if($("#zipcode").val() == ""){
+                                        alert("Please enter your zipcode!");
+                                    }else{
+                                        if($("#select").val() == "Default"){
+                                            alert("Please choose a source!");
+                                            return false;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    alert("Please choose a title!");
+                }
+        })
+            $("#firstName").keyup(function(){
+                if(!$("#firstName").valid()){
+                    $("#firstName").css("background-Color","#fa8072");
+                }else{
+                    $("#firstName").css("background-Color","white");
+                }
+            })
+            $("#lastName").keyup(function(){
+                if(!$("#lastName").valid()){
+                    $("#lastName").css("background-Color","#fa8072");  
+                }else{
+                    $("#lastName").css("background-Color","white");
+                }
+            })
+            $("#emailId").keyup(function(){
+                if(!$("#emailId").valid()){
+                    $("#emailId").css("background-Color","#fa8072");
+                }else{
+                    $("#emailId").css("background-Color","white");
+                }
+            })
+            $("#phoneNumber").keyup(function(){
+                if(!$("#phoneNumber").valid()){
+                    $("#phoneNumber").css("background-Color","#fa8072"); 
+                }else{
+                    $("#phoneNumber").css("background-Color","white");
+                }
+            })
+            $("#zipcode").keyup(function(){
+                if(!$("#zipcode").valid()){
+                    $("#zipcode").css("background-Color","#fa8072");  
+                }else{
+                    $("#zipcode").css("background-Color","white");
+                }
+            })
+            $("#select").change(function(){
+                var value = $("#select").val();
+                $("#hidden1").css("display","none");
+                $("#hidden2").css("display","none");
+                $("#hidden3").css("display","none");
+                $("#hidden4").css("display","none");
+                $("#hidden5").css("display","none");
+                switch(value){
+                    case "Social Media":
+                    $("#hidden1").css("display","inline");
+                    break;
+                    case "Website":
+                    $("#hidden2").css("display","inline");
+                    break;
+                    case "Apps":
+                    $("#hidden3").css("display","inline");
+                    break;
+                    case "People":
+                    $("#hidden4").css("display","inline");
+                    break;
+                    case "Other":
+                    $("#hidden5").css("display","inline");
+                    break;
+                }
+            })
+            $('input[type="checkbox"]').click(function(){
+                if(this.checked){
+                    $("#example").css("display","block");
+                }else{
+                    $("#example").css("display","none");
+                }
+            })
+        });
+    </script>
+    <title>Feedback</title>
+	<style>
+		label{	
+            float: left;
+            margin-left: 15px;
+			width: 150px;}
+		#container{
+			width: 700px;
+			margin: auto;
+			background-color: beige;
+		} 
+		main{
+			padding: 50px;
+		}
+		li{
+			list-style-type:none;
+			margin:0px;
+			padding:0px;
+			vertical-align:middle;
+		}	
+        label.error{
+            float: none;
+        }
+	</style>
+</head>
+<body>
+	<div id="container">	 
+		<main>
+		<h2>Feeback</h2>
+		<h3>Love something? Hate something? Let us know!</h3>
+			Note : Fields marked with an asterisk(*) are mandatory
+			<br><br>
+			<form method="post" id="myForm" action="Untitled-1.html">
+                <p>
+				<label>Title*:</label>
+				<input type="radio" name="title" id="miss" value="Miss"/>Miss
+				<input type="radio" name="title" id="mr" value="Mr"/>Mr.
+                <input type="radio" name="title" id="mrs" value="Mrs"/>Mrs.
+                </p>
+                <p>
+				<label for="firstName">First Name*:</label>   
+				<!-- The for attribute specifies which form element a label is bound to. -->
+                <input type="text" name="firstName" id="firstName" placeholder="First Name"/>
+                </p>	
+				<p>
+				<label for="lastName">Last Name*:</label>
+				<input type="text" name="lastName" id="lastName" placeholder="Last Name"/>
+                </p>
+                <p>
+				<label for="emailId">Email Id*:</label>
+                <input type="text" name="emailId" id="emailId" placeholder="yourname@domain.com"/>
+				</p>
+				<p>
+				<label for="phoneNumber">Phone Number*:</label>
+				<input type="text" name="phoneNumber" id="phoneNumber" placeholder="xxxxxxxxxx"/>
+				</p>
+				<p>
+				<label for="zipcode">ZipCode*:</label>
+				<input type="text" name="zipcode" id="zipcode" placeholder="xxxxx"/>
+				</p>
+				<p>
+				<label for="select">How did you hear*:</label>
+				<select id="select"  name="source" class="required">
+                    <option value="Default" selected="selected">-Please select an option-</option>
+					<option value="Social Media">Social Media</option>
+					<option value="Website">Website</option>
+					<option value="Apps">Apps</option>
+					<option value="People">People</option>
+					<option value="Other">Other</option>
+				</select>
+				</p>
+				<p id="hidden1" style="display:none">
+                <input id="checkbox" type="checkbox" name="hear" value="Facebook"/>Facebook
+                </p>
+                <p id="hidden2" style="display:none">
+                <input id="checkbox" type="checkbox" name="hear" value="Google"/>Google
+                </p>
+                <p id="hidden3" style="display:none">
+                <input id="checkbox" type="checkbox" name="hear" value="Yelp"/>Yelp
+                </p>
+                <p id="hidden4" style="display:none">
+                <input id="checkbox" type="checkbox" name="hear" value="Family"/>Family
+                </p>
+                <p id="hidden5" style="display:none">
+                <input id="checkbox" type="checkbox" name="hear" value="Flyer"/>Flyer
+                </p>
+                <p id="example" style="display:none;">
+                <label id="label" for="textarea">Please make an example:</label>
+                <textarea name="example" id="textarea" placeholder="Your example" rows="2" cols="25"></textarea>
+                </p>
+                <p>
+				<label for="comments">Comments:</label>
+				<textarea name="text" id="comments" placeholder="Your comments" rows="5" cols="25"></textarea>
+				<br><br>
+				<input type="Submit" id="btn">
+				<input type="Reset">
+				</p>
+			</form>
+		</main>
+	</div>
+
+</body>
+</html>

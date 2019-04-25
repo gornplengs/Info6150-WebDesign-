@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mean shell</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body>
+	<div ng-app="MyApp" ng-controller="MyController">
+		<form ng-submit="submit()">
+		  	Enter text and hit enter:
+		  	<input type="text" ng-model="mes" name="mes" />
+		  	<input type="submit" id="submit" value="Submit" />
+		</form>
+		<h1>Data is displayed below</h1>
+		<h4 ng-repeat="sample in samples">{{sample.message}}</h4>
+	</div>
+	<script type="text/javascript">
+		var app = angular.module('MyApp', []);
+		app.controller('MyController', function($scope, $http) {
+			$http.get("api/show").then(function (response) {
+				console.log(response.data);
+				$scope.samples = response.data;
+			})
+			$scope.submit = function() {
+		        if ($scope.mes) {
+		          	$http.get("api/insert?mes=" + $scope.mes);
+		          	$scope.mes = "";
+		          	$http.get("api/show").then(function (response) {
+						console.log(response.data);
+				  	$scope.samples = response.data;
+					});
+		        }
+      		};
+		});
+	</script>
+</body>
+</html>
